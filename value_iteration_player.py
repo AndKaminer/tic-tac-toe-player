@@ -90,7 +90,7 @@ class ValueIterationAgent:
                 if winner:
                     count += 1
                 g.reset()
-            print(f"Win Rate: {count / 100)")
+            print(f"Win Rate: {count / 100}")
 
 
 class ValueIterationPlayer(NonHumanPlayer):
