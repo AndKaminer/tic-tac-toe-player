@@ -1,4 +1,4 @@
-from non_human_player import NonHumanPlayer
+from players import NonHumanPlayer
 from board import Board
 
 import random

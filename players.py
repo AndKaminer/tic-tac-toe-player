@@ -1,6 +1,8 @@
 from board import Board
 
 from abc import ABC, abstractmethod
+import random
+import time
 
 class Player(ABC):
     def __init__(self, board: Board):
@@ -30,3 +32,16 @@ class Player(ABC):
 
     def reset(self) -> None:
         self.move_number = 0
+
+
+class NonHumanPlayer(Player):
+    def __init__(self, board: Board, max_delay: int):
+        super().__init__(board)
+        self.max_delay = max_delay
+
+    def move_semantics(self) -> tuple[int, int]:
+        delay: int = random.randint(0, self.max_delay + 1)
+        time.sleep(delay)
+
+        return self.choose_move()
+
