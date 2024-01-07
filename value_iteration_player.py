@@ -74,10 +74,23 @@ class ValueIterationAgent:
 
         self.v_policy = self.v.copy()
 
-    def epoch(self, n: int, size: int=1000):
+    def epoch(self, n: int, size: int=10000):
         for i in range(n):
-            print(f"Epoch: {i}")
+            print(f"Starting Epoch: {i}")
             self.iteration(size)
+
+            # find approx win percentage
+
+            v: ValueIterationPlayer = ValueIterationPlayer(self. board, self, 0)
+            r: RandomPlayer = RandomPlayer(self.board, 0)
+            g: game = Game(v1, r)
+            count: int = 0
+            for i in range(100):
+                states, winner = g.play(silent = True)
+                if winner:
+                    count += 1
+                g.reset()
+            print(f"Win Rate: {count / 100)")
 
 
 class ValueIterationPlayer(NonHumanPlayer):
