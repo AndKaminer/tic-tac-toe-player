@@ -61,8 +61,8 @@ class Board:
             raise Exception("Invalid state")
 
         for i in range(3):
-            offset = i * 3
-            if state[0 + offset] == state[1 + offset] == state[offset]:
+            offset: int = i * 3
+            if state[0 + offset] == state[1 + offset] == state[2 + offset]:
                 # row check
                 return state[0 + offset]
             elif state[0 + i] == state[3 + i] == state[6 + i]:
@@ -74,8 +74,7 @@ class Board:
             elif state[2] == state[4] == state[6]:
                 # diag 2 check
                 return state[2]
-            else:
-                return None
+        return None
 
     def state_to_board(self) -> list[list]:
         board: list[list] = Board.get_empty_board()
@@ -119,6 +118,7 @@ class Board:
         self.p1turn = self.calc_turn()
         if len(self.get_possible_moves()) == 0 or self.p1winner != None:
             self.game_finished = True
+            self.p1winner = self.check_winner()
 
     def reset(self) -> None:
         self.state = Board.get_empty_state()
@@ -135,6 +135,21 @@ class Board:
             for col in range(3):
                 if board[row][col] == None:
                     output.append((row, col))
+
+        return output
+
+    def get_possible_next_states(self) -> list[tuple]:
+        '''
+        Guaranteed to be same order as self.get_possible_moves
+        '''
+        possible_moves: list[tuple] = self.get_possible_moves()
+        output: list[tuple] = []
+        for row, col in possible_moves:
+            idx: int = (3 * row) + col
+            cur_state: list[bool] = list(self.get_state())
+            cur_state[idx] = self.p1turn
+
+            output.append(tuple(cur_state))
 
         return output
 

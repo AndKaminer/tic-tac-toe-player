@@ -40,8 +40,6 @@ class NonHumanPlayer(Player):
         self.max_delay = max_delay
 
     def move_semantics(self) -> tuple[int, int]:
-        delay: int = random.randint(0, self.max_delay + 1)
+        delay: int = random.randint(0, self.max_delay)
         time.sleep(delay)
-
         return self.choose_move()
-

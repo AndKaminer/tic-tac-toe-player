@@ -13,7 +13,7 @@ class HumanPlayer(Player):
             while True:
                 try:
                     row: int = int(input("Please choose a move. Type in the row (Zero indexed): "))
-                    col: int = int(input("Pleaes choose a column. (Zero indexed): "))
+                    col: int = int(input("Please choose a column. (Zero indexed): "))
                 except Exception:
                     print("Invalid move. Please try again.")
                     continue
