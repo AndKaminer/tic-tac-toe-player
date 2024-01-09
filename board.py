@@ -15,7 +15,11 @@ class Board:
         self.board = self.state_to_board()
         self.p1turn = self.calc_turn()
         self.p1winner = self.check_winner()
-        self.game_finished: bool = False
+        if len(self.get_possible_moves()) == 0 or self.p1winner != None:
+            self.game_finished = True
+            self.p1winner = self.check_winner()
+        else:
+            self.game_finished = False
 
     def get_board(self) -> list[list]:
         return self.board
